@@ -1,16 +1,16 @@
 
 var config = {
     // Blog Name
-    title:      'Blog Name',
+    title:      'AcyOrt',
 
     // Blog Info    
-    about:      'Lorem ipsum dolor sit amet, ius sonet omnesque facilisis an, etiam mediocrem ad ius. Ius ei graece altera, at suavitate adolescens per.',                  
+    about:      'Lorem ipsum dolor sit amet, ius sonet omnesque facilisis an, etiam mediocrem ad ius.',                  
 
     // GitHub UserName
-    user:       '',
+    user:       'LoeiFy',
 
     // GitHub Repo    
-    repo:       '',           
+    repo:       'Recordum',           
 
     // Per Page Posts
     perpage:    10,                  
