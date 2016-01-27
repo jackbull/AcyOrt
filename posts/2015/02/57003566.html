@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/dists/icon.png" />
+<title> 使用 inline-block 水平垂直居中任意内容 - AcyOrt </title>
+<link rel="stylesheet" href="/dists/acyort.css" />
+</script>
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">AcyOrt</a></h1>
+        <p>Lorem ipsum dolor sit amet, ius sonet omnesque facilisis an, etiam mediocrem ad ius.</p>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>使用 inline-block 水平垂直居中任意内容</h1>
+    <p><a href="https://github.com/LoeiFy">LoeiFy</a> Updated at Jan 19, 2016</p>
+
+    <div class="content"><p>挺好用的水平垂直居中任意内容代码，并且支持度很高</p>
+<h3 id="-">相关代码</h3>
+<h4 id="html">html</h4>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 注释用于去除 inline-block `间隙` --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span><span class="hljs-comment">&lt;!--
+ --&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"center"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>这个是居中标题<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这里是一些文字，文字<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-comment">&lt;!--
+--&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h4 id="css">css</h4>
+<pre><code class="lang-css"><span class="hljs-selector-class">.container</span> {
+    <span class="hljs-attribute">text-align</span>: center;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;
+}
+<span class="hljs-selector-class">.container</span><span class="hljs-selector-pseudo">:before</span>,
+<span class="hljs-selector-class">.container</span><span class="hljs-selector-pseudo">:after</span>    <span class="hljs-comment">/* :after 可以不需要 */</span>
+{
+    <span class="hljs-attribute">display</span>: inline-block;
+    <span class="hljs-attribute">vertical-align</span>: middle;
+    <span class="hljs-attribute">content</span>: <span class="hljs-string">''</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+}
+<span class="hljs-selector-class">.center</span> {
+    <span class="hljs-attribute">display</span>: inline-block;
+    <span class="hljs-attribute">vertical-align</span>: middle;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>;
+}
+</code></pre>
+<h4 id="demo">demo</h4>
+<p><a href="http://jsfiddle.net/am0200/49sp6e9n/3/">http://jsfiddle.net/am0200/49sp6e9n/3/</a></p>
+</div>
+
+    <div class="label">
+    <div style="background-color:#207de5">#css</div>
+    <div style="background-color:#eb6420">#html</div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 AcyOrt . <a target="_blank" href="https://github.com/youmi/AcyOrt">AcyOrt</a>
+    </div>
+</div>
+
+</body>
+</html>

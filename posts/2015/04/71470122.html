@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/dists/icon.png" />
+<title> 移动端充值卡输入用户体验，卡号密码输入过程自动添加空格 - AcyOrt </title>
+<link rel="stylesheet" href="/dists/acyort.css" />
+</script>
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">AcyOrt</a></h1>
+        <p>Lorem ipsum dolor sit amet, ius sonet omnesque facilisis an, etiam mediocrem ad ius.</p>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>移动端充值卡输入用户体验，卡号密码输入过程自动添加空格</h1>
+    <p><a href="https://github.com/LoeiFy">LoeiFy</a> Updated at Jan 14, 2016</p>
+
+    <div class="content"><h3 id="-">背景</h3>
+<p>国内主要充值卡是移动，联通还有电信，还有一些游戏卡，骏卡之类的。因为卡号密码数字都很多，它们卡上的卡号密码一般都有类似银行卡那样的数字空格，方便用户输入数字。但是各种卡的数字空格位置不同，有些第四个开始空格，有些第二个就开始空格了。</p>
+<p>这里讲的移动端支付是指 <code>Android</code> 上的 SDK 支付，为了更新方便，很多使用 Android webview 方式。相当于我们需要在浏览器上实现数字输入添加空格效果。</p>
+<p>在移动端上输入卡号密码之类的，因为都是数字，我们当然希望输入过程弹出的输入键盘是数字键盘，而不是全键盘。所以一开始会想到用这样来实现：</p>
+<pre><code class="lang-html">&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"number"</span> placeholder=<span class="hljs-string">"请输入卡号"</span> /&gt;
+</code></pre>
+<p>这时候弹出的就是数字键盘，符合要求，但是在 Android 4.x 上，你会发现不会显示 <code>请输入卡号</code> 这几个字，这是一个 bug，相关链接：</p>
+<p><a href="https://code.google.com/p/android/issues/detail?id=24626">https://code.google.com/p/android/issues/detail?id=24626</a></p>
+<p>还有一个坑点，就是在数字类型输入框中，你无法插入 <code>非数字字符</code>，就是说你没法在某些位置插入空格</p>
+<p>所以我们采取另一种方式：</p>
+<pre><code class="lang-html">&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"tel"</span> placeholder=<span class="hljs-string">"请输入卡号"</span> /&gt;
+</code></pre>
+<p>使用输入框是 <code>tel</code> 这时候弹出的也是类数字键盘，<code>placeholder</code> 也是正常显示，更重要的是，可以插入空格</p>
+<h3 id="-zepto-js-">具体代码（页面引入 zepto.js）</h3>
+<h4 id="html">HTML</h4>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 这里 data-gap="3" 代表第三位开始添加空格 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"cardNo"</span> <span class="hljs-attr">data-gap</span>=<span class="hljs-string">"3"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"tel"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"请输入卡号"</span>/&gt;</span>
+</code></pre>
+<h4 id="javascript">JavaScript</h4>
+<pre><code class="lang-js">$(<span class="hljs-string">'#cardNo'</span>).on(<span class="hljs-string">'input'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> m = $(<span class="hljs-keyword">this</span>).data(<span class="hljs-string">'gap'</span>)
+
+    <span class="hljs-comment">// t 为用户输入值, _t 为添加空格值</span>
+    <span class="hljs-keyword">var</span> t = $(<span class="hljs-keyword">this</span>).val().split(<span class="hljs-string">' '</span>).join(<span class="hljs-string">''</span>), _t = <span class="hljs-string">''</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; t.length; i ++) {
+        <span class="hljs-comment">// 输入数字太长忽略</span>
+        <span class="hljs-keyword">if</span> (i == m - <span class="hljs-number">1</span> || i == m + <span class="hljs-number">3</span> || i == m + <span class="hljs-number">7</span> || i == m + <span class="hljs-number">11</span> || i == m + <span class="hljs-number">15</span>) {
+            _t = _t + t.charAt(i) +<span class="hljs-string">' '</span>
+        } <span class="hljs-keyword">else</span> {
+            _t = _t + t.charAt(i)
+        }
+    }
+
+    <span class="hljs-comment">// 去除末尾空格，去除非数字</span>
+    <span class="hljs-keyword">if</span> (_t.charAt(_t.length - <span class="hljs-number">1</span>) == <span class="hljs-string">' '</span> || <span class="hljs-built_in">isNaN</span>(_t.charAt(_t.length - <span class="hljs-number">1</span>))) {
+        _t = _t.substring(<span class="hljs-number">0</span>, _t.length - <span class="hljs-number">1</span>)
+    }
+
+    $(<span class="hljs-keyword">this</span>).val(_t)
+
+    <span class="hljs-comment">// 兼容某些机器</span>
+    setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        $(tag)[<span class="hljs-number">0</span>].setSelectionRange(_t.length, _t.length)
+        $(tag).focus()
+    }, <span class="hljs-number">0</span>)
+})
+</code></pre>
+<p>获取输入值:</p>
+<p><code>$(&#39;#cardNo&#39;).val().split(&#39; &#39;).join(&#39;&#39;)</code></p>
+<h3 id="demo">demo</h3>
+<p><a href="http://jsfiddle.net/am0200/qugp8tvL/">http://jsfiddle.net/am0200/qugp8tvL/</a></p>
+</div>
+
+    <div class="label">
+    <div style="background-color:#fbca04">#javascript</div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 AcyOrt . <a target="_blank" href="https://github.com/youmi/AcyOrt">AcyOrt</a>
+    </div>
+</div>
+
+</body>
+</html>
