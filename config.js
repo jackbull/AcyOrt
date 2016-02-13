@@ -11,7 +11,7 @@ module.exports = {
     rss:        '/rss.xml',                                     // RSS Link
     perpage:    5,                                              // Posts Per Page
     token:      ''+'',                                          // GitHub Access Token(Optional)
-    authors:    [],                                             // Post Authors
+    authors:    ['LoeiFy'],                                     // Post Authors
     menu: [                                                     // Menu
         {name: 'home', url: '/'},
         {name: 'about', url: '/page/about/'},
