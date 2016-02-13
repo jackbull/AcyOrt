@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="google" content="notranslate" />
 <link rel="icon" href="/assets/icon.png" />
-<title>{{{title}}} - {{{site_title}}} </title>
+<title> {{{name}}} - {{{site_title}}} </title>
 <link rel="stylesheet" href="/assets/acyort.css" />
 </head>
 <body>
@@ -22,17 +22,31 @@
     </div>
 </div>
 
-<div id="post" class="center">
+<div id="posts" class="center">
 
-    <h1>{{{title}}}</h1>
-    <p><a href="{{{user.html_url}}}">{{{user.login}}}</a> Updated at {{{post_time}}}</p>
+    <h2 class="tag">Tag : <span>#{{{name}}}</span></h2>
 
-    <div class="content">{{{marked_body}}}</div>
+    <ul>
+    {{#posts}}
+        <li>
 
-    <div class="label">
-    {{#labels}}
-    <div><a href="/tags/{{{name}}}/">#{{{name}}}</a></div>
-    {{/labels}}
+        <div class="post">
+            <h2><a href="{{{path}}}">{{{title}}}</a></h2>
+            <p>{{{summary}}}</p>
+            <p class="time">{{{post_time}}}</p>
+        </div>
+
+        <a class="author" href="{{{user.html_url}}}" target="_blank">
+            <img src="{{{user.avatar_url}}}" />
+        </a>
+
+        </li>
+    {{/posts}}
+    </ul>
+
+    <div id="pagination">
+        <a rel="prev" class="{{{prev.css}}}" href="{{{prev.url}}}">← Newer Posts</a>
+        <a rel="next" class="{{{next.css}}}" href="{{{next.url}}}">Older Posts →</a>
     </div>
 
 </div>

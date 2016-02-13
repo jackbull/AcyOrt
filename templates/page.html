@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="google" content="notranslate" />
 <link rel="icon" href="/assets/icon.png" />
-<title>{{{title}}} - {{{site_title}}} </title>
+<title> {{{page_title}}} - {{{site_title}}} </title>
 <link rel="stylesheet" href="/assets/acyort.css" />
 </head>
 <body>
@@ -25,15 +25,8 @@
 <div id="post" class="center">
 
     <h1>{{{title}}}</h1>
-    <p><a href="{{{user.html_url}}}">{{{user.login}}}</a> Updated at {{{post_time}}}</p>
 
     <div class="content">{{{marked_body}}}</div>
-
-    <div class="label">
-    {{#labels}}
-    <div><a href="/tags/{{{name}}}/">#{{{name}}}</a></div>
-    {{/labels}}
-    </div>
 
 </div>
 
